@@ -11,6 +11,8 @@ public class Player1Controller : MonoBehaviour
     
     protected float speed = 5;
     public int lives = 3;
+    public float spinSpeed = 5f;
+    public bool rigidSpinning = true;
 
     public GameObject currentPiece = null;
 
@@ -51,6 +53,22 @@ public class Player1Controller : MonoBehaviour
     {
         float x_movement = Input.GetAxis("Horizontal");
 
+        //continuous spinning
+        if (Input.GetAxisRaw("Vertical") != 0 && !rigidSpinning)
+        {
+            this.transform.Rotate(0, 0, spinSpeed * Input.GetAxisRaw("Vertical"));
+        }
+
+        //rigid spinning
+        if (Input.GetKeyDown(KeyCode.W) && rigidSpinning)
+        {
+            this.transform.Rotate(0, 0, 45);
+        }
+        if (Input.GetKeyDown(KeyCode.S) && rigidSpinning)
+        {
+            this.transform.Rotate(0, 0, -45);
+        }
+
         //player_rigidbody.velocity = new Vector2(x_movement * speed, 0);
         this.transform.position = new Vector3(this.transform.position.x + x_movement, this.transform.position.y, this.transform.position.z);
 
@@ -69,6 +87,7 @@ public class Player1Controller : MonoBehaviour
         currentPiece.GetComponent<Rigidbody2D>().gravityScale = 0.65f;
         currentPiece.transform.parent = null;
         currentPiece = null;
+        this.transform.rotation = Quaternion.identity;
         GameController.instance.phase = 2;
         GameController.instance.turn_counter += 1;
     }
