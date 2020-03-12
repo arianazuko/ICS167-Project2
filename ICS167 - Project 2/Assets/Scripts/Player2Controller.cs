@@ -9,9 +9,9 @@ public class Player2Controller : MonoBehaviour
 
     [SerializeField]
     protected Camera player_camera;
+    private List<GameObject> tower = new List<GameObject>();
 
     protected float speed = 5;
-    public int lives = 3;
     public float spinSpeed = 5f;
     public bool rigidSpinning = true;
 
@@ -34,6 +34,7 @@ public class Player2Controller : MonoBehaviour
     {
         if (GameController.instance.phase == 2)
         {
+            AdjustHeight();
             Move();
             if (currentPiece != null)
             {
@@ -87,9 +88,31 @@ public class Player2Controller : MonoBehaviour
     {
         currentPiece.GetComponent<Rigidbody2D>().gravityScale = 0.65f;
         currentPiece.transform.parent = null;
+        tower.Add(currentPiece);
         currentPiece = null;
         this.transform.rotation = Quaternion.identity;
-        GameController.instance.phase = 1;
+        GameController.instance.phase = 2;
         GameController.instance.turn_counter += 1;
     }
+
+    void AdjustHeight()
+    {
+        if (tower.Count != 0)
+        {
+            GameObject tallest = tower[0];
+            foreach (GameObject piece in tower)
+            {
+                if (piece.transform.position.y > tallest.transform.position.y)
+                {
+                    tallest = piece;
+                }
+            }
+            if ((this.transform.position.y - tallest.transform.position.y) < 2.0f)
+            {
+                this.transform.position += Vector3.up;
+                player_camera.transform.position += Vector3.up;
+            }
+        }
+    }
+
 }

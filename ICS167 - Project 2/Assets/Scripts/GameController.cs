@@ -13,6 +13,9 @@ public class GameController : MonoBehaviour
     public bool one_removed = false;
     public bool two_removed = false;
 
+    public int player1_lives = 3;
+    public int player2_lives = 3;
+
     [SerializeField] protected List<GameObject> pieces = null;
     [SerializeField] protected GameObject playerone, playertwo;
 
@@ -60,11 +63,11 @@ public class GameController : MonoBehaviour
             }
         }
 
-        if (playerone.GetComponent<Player1Controller>().lives == 0)
+        if (player1_lives <= 0)
         {
             WinnerTwoUI.SetActive(true);
         }
-        if (playertwo.GetComponent<Player2Controller>().lives == 0)
+        if (player2_lives == 0)
         {
             WinnerOneUI.SetActive(true);
         }
@@ -76,7 +79,7 @@ public class GameController : MonoBehaviour
         {
             GameObject a = (GameObject)Instantiate(pieces[Random.Range(0, 100) % pieces.Count]);
             a.transform.SetParent(this.transform);
-            a.transform.localPosition = new Vector3(0, -125 + (pieces_left * 50), 0);
+            a.transform.localPosition = new Vector3(0, -200 + (pieces_left * 100), 0);
             pieces_left += 1;
         }
     }
