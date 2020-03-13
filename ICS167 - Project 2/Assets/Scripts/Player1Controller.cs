@@ -33,7 +33,7 @@ public class Player1Controller : MonoBehaviour
     {
         if (GameController.instance.phase == 1)
         {
-            AdjustHeight();
+            //AdjustHeight();
             Move();
             if (currentPiece != null)
             {
@@ -42,11 +42,6 @@ public class Player1Controller : MonoBehaviour
                     Drop();
                 }
             }
-        }
-        if (GameController.instance.phase == 3)
-        {
-            //insert remove phase functions
-            GameController.instance.one_removed = true;
         }
     }
 
@@ -91,10 +86,11 @@ public class Player1Controller : MonoBehaviour
         currentPiece = null;
         this.transform.rotation = Quaternion.identity;
         GameController.instance.phase = 2;
+        SFXManagerScript.instance.PlaySFX(3);
         GameController.instance.turn_counter += 1;
     }
 
-    void AdjustHeight()
+    /*void AdjustHeight()
     {
         if (tower.Count != 0)
         {
@@ -113,5 +109,5 @@ public class Player1Controller : MonoBehaviour
             }
         }
     }
-    
+    */
 }

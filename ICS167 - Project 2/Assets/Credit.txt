@@ -1,0 +1,9 @@
+Music:
+	River Fire by Kevin MacLeod
+	Link: https://incompetech.filmmusic.io/song/4294-river-fire
+	License: http://creativecommons.org/licenses/by/4.0/
+Sound Effects:
+	Stone Dropping: https://freesound.org/people/SoundCollectah/sounds/158466/
+	Burning: https://freesound.org/people/Quaker540/sounds/214456/
+	Phase Change: https://freesound.org/people/mogalini/sounds/424248/
+	Win: https://freesound.org/people/djlprojects/sounds/419594/

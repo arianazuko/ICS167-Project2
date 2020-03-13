@@ -19,6 +19,7 @@ public class PlayerDeathScript : MonoBehaviour
             {
                 GameController.instance.player2_lives -= 1;
             }
+            SFXManagerScript.instance.PlaySFX(1);
             Destroy(other.gameObject);
         }
     }
