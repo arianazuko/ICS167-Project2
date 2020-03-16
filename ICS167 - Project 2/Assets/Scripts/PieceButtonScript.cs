@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PieceButtonScript : MonoBehaviour
 {
@@ -30,5 +31,20 @@ public class PieceButtonScript : MonoBehaviour
         }
         else
             return;
+    }
+
+    public void mouseEnter()
+    {
+        Color button = gameObject.GetComponent<Image>().color;
+        button.a = 0.8f;
+        gameObject.GetComponent<Image>().color = button;
+    }
+
+    public void mouseExit()
+
+    {
+        Color button = gameObject.GetComponent<Image>().color;
+        button.a = 1f;
+        gameObject.GetComponent<Image>().color = button;
     }
 }

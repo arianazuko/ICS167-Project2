@@ -14,6 +14,7 @@ public class GameController : MonoBehaviour
 
     public bool one_removed = false;
     public bool two_removed = false;
+    public bool removePiecesOnSameTurn = false;
 
     public bool one_goal = false;
     public bool two_goal = false;
