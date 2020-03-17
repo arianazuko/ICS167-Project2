@@ -7,6 +7,7 @@ using TMPro;
 public class GameController : MonoBehaviour
 {
     public int phase = 0;
+    private int saved_phase = 0;
     //0 = not playing, 1 = player 1, 2 = player 2, 3 = player 1 removal, 4 = player 2 removal
     public int pieces_left = 0;
     public int turn_counter = 0;
@@ -27,7 +28,7 @@ public class GameController : MonoBehaviour
     [SerializeField] protected List<GameObject> pieces = null;
     [SerializeField] protected GameObject playerone, playertwo;
 
-    [SerializeField] protected GameObject WinnerOneUI, WinnerTwoUI;
+    [SerializeField] protected GameObject WinnerOneUI, WinnerTwoUI, PauseUI;
     [SerializeField] protected TextMeshProUGUI PhaseText;
 
     public static GameController instance;
@@ -77,10 +78,12 @@ public class GameController : MonoBehaviour
 
         if (player1_lives <= 0 || two_goal == true)
         {
+            phase = 0;
             WinnerTwoUI.SetActive(true);
         }
         if (player2_lives == 0 || one_goal == true)
         {
+            phase = 0;
             WinnerOneUI.SetActive(true);
         }
     }
@@ -149,5 +152,19 @@ public class GameController : MonoBehaviour
         UnityEditor.EditorApplication.isPlaying = false;
 #endif
         Application.Quit();
+    }
+
+    public void Pause()
+    {
+        saved_phase = phase;
+        phase = 0;
+        PauseUI.SetActive(true);
+    }
+
+    public void Resume()
+    {
+        phase = saved_phase;
+        saved_phase = 0;
+        PauseUI.SetActive(false);
     }
 }
